@@ -7,8 +7,10 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <title>HarmProfile - Case Study Explorer</title>
-<link rel="icon" type="image/png" sizes="64x64" href="favicon.png?v=joker-20260604">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png?v=joker-20260604">
+<link rel="shortcut icon" href="/HarmProfile/data/figures/favicon.ico?v=joker-20260604-3">
+<link rel="icon" href="/HarmProfile/data/figures/favicon.ico?v=joker-20260604-3" sizes="any">
+<link rel="icon" type="image/png" sizes="64x64" href="/HarmProfile/data/figures/favicon.png?v=joker-20260604-3">
+<link rel="apple-touch-icon" sizes="180x180" href="/HarmProfile/data/figures/apple-touch-icon.png?v=joker-20260604-3">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -1299,7 +1301,7 @@
 
 <header>
   <div class="hero-identity">
-    <img class="paper-logo" src="logos/joker.png?v=desktop-20260604-2146" alt="HarmProfile cyber jester logo">
+    <img class="paper-logo" src="data/figures/joker.png?v=desktop-20260604-2146" alt="HarmProfile cyber jester logo">
     <div class="hero-copy">
       <h1><span class="title-wordmark">HarmProfile</span>: Characterizing Harmful Distributions in Frontier LLMs</h1>
       <p class="authors">
@@ -1917,7 +1919,7 @@ function logoName(model) {
 function logoMarkup(model) {
   if (!model) return '<span class="model-logo-fallback">All</span>';
   const logo = logoName(model);
-  return `<img class="model-logo" src="logos/${logo}.svg" alt="${escapeHtml(logo)}" onerror="this.replaceWith(Object.assign(document.createElement('span'), {className:'model-logo-fallback', textContent:'${escapeHtml(model[0] || '*')}' }))">`;
+  return `<img class="model-logo" src="data/figures/logos/${logo}.svg" alt="${escapeHtml(logo)}" onerror="this.replaceWith(Object.assign(document.createElement('span'), {className:'model-logo-fallback', textContent:'${escapeHtml(model[0] || '*')}' }))">`;
 }
 
 function closePickers(except = null) {
@@ -2222,7 +2224,7 @@ function displaySamples() {
     return `
       <div class="chat-card" data-sample-card="${i}">
         <div class="chat-header">
-          <img src="logos/${logo}.svg" alt="${logo}" onerror="this.style.display='none'">
+          <img src="data/figures/logos/${logo}.svg" alt="${logo}" onerror="this.style.display='none'">
           <span class="model-name">${escapeHtml(s._llm)}</span>
           <span class="topic-tag" title="${escapeHtml(s._topic_name)}">${escapeHtml(s._topic_name)}</span>
         </div>
@@ -2234,7 +2236,7 @@ function displaySamples() {
             </div>
           </div>
           <div class="msg msg-assist${collapsedClass}">
-            <div class="msg-icon"><img src="logos/${logo}.svg" alt="${logo}"></div>
+            <div class="msg-icon"><img src="data/figures/logos/${logo}.svg" alt="${logo}"></div>
             <div class="msg-bubble" role="button" tabindex="0" title="Click to collapse or expand">
               <div class="msg-label">Assistant Response</div><div class="msg-text" id="response-text-${i}"></div><span class="typing-cursor" id="response-cursor-${i}" style="display:none"></span><span class="msg-affordance"><span class="affordance-text"></span></span>
             </div>
