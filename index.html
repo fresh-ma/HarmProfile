@@ -1474,6 +1474,7 @@ let indexData = null;
 let categoryCache = {};
 let currentSamples = [];
 let currentDisplayPool = [];
+let currentDisplayByModel = [];
 let currentCategory = '';
 let selectedCategories = new Set();
 let activeView = 'samples';
@@ -2087,6 +2088,7 @@ async function loadSamples() {
   if (!cats.length) {
     currentSamples = [];
     currentDisplayPool = [];
+    currentDisplayByModel = [];
     statsRow.style.display = 'none';
     statsRow.innerHTML = '';
     displaySamples();
@@ -2113,6 +2115,7 @@ async function loadSamples() {
 
   currentSamples = samples;
   currentDisplayPool = candidateSamplesForDisplay(samples);
+  currentDisplayByModel = buildDisplayModelBuckets(currentDisplayPool);
   statsRow.style.display = 'none';
   statsRow.innerHTML = '';
   displaySamples();
@@ -2180,26 +2183,63 @@ function candidateSamplesForDisplay(samples) {
   return filtered.concat(samples.filter(sample => !responseLongEnough(sample)));
 }
 
-function diverseModelSamplePool(samples, limit) {
-  const shuffled = shuffle(samples);
+function buildDisplayModelBuckets(samples) {
   const byModel = new Map();
-  shuffled.forEach(sample => {
+  samples.forEach(sample => {
     const model = sample?._llm || 'unknown';
     if (!byModel.has(model)) byModel.set(model, []);
     byModel.get(model).push(sample);
   });
+  return Array.from(byModel.values());
+}
 
+function randomArrayItem(items) {
+  return items[Math.floor(Math.random() * items.length)];
+}
+
+function sampleWithoutReplacement(items, limit, exclude = new Set()) {
   const selected = [];
-  const leftovers = [];
-  Array.from(byModel.entries())
-    .sort(() => Math.random() - 0.5)
-    .forEach(([, rows]) => {
-      if (selected.length < limit) selected.push(rows[0]);
-      leftovers.push(...rows.slice(1));
-    });
+  const usedIndexes = new Set();
+  if (!items.length || limit <= 0) return selected;
+  const attemptsLimit = Math.max(limit * 8, 32);
+  let attempts = 0;
+  while (selected.length < limit && attempts < attemptsLimit && usedIndexes.size < items.length) {
+    attempts += 1;
+    const idx = Math.floor(Math.random() * items.length);
+    if (usedIndexes.has(idx)) continue;
+    usedIndexes.add(idx);
+    const item = items[idx];
+    if (exclude.has(item)) continue;
+    selected.push(item);
+  }
+  if (selected.length < limit) {
+    for (let i = 0; i < items.length && selected.length < limit; i += 1) {
+      if (usedIndexes.has(i)) continue;
+      const item = items[i];
+      if (!exclude.has(item)) selected.push(item);
+    }
+  }
+  return selected;
+}
+
+function diverseModelSamplePool(samples, limit, modelBuckets = null) {
+  const buckets = modelBuckets?.length ? modelBuckets : buildDisplayModelBuckets(samples);
+  const selected = [];
+  const used = new Set();
+  const bucketOrder = sampleWithoutReplacement(buckets, Math.min(limit, buckets.length));
+  bucketOrder.forEach(rows => {
+    const sample = randomArrayItem(rows);
+    if (sample && !used.has(sample) && selected.length < limit) {
+      selected.push(sample);
+      used.add(sample);
+    }
+  });
 
   if (selected.length < limit) {
-    selected.push(...shuffle(leftovers).slice(0, limit - selected.length));
+    sampleWithoutReplacement(samples, limit - selected.length, used).forEach(sample => {
+      selected.push(sample);
+      used.add(sample);
+    });
   }
   return shuffle(selected).slice(0, limit);
 }
@@ -2214,7 +2254,7 @@ function displaySamples() {
   }
 
   const displayPool = currentDisplayPool.length ? currentDisplayPool : currentSamples;
-  const selected = promoteShowcaseSamples(diverseModelSamplePool(displayPool, SAMPLES_PER_PAGE));
+  const selected = promoteShowcaseSamples(diverseModelSamplePool(displayPool, SAMPLES_PER_PAGE, currentDisplayByModel));
   const rendered = selected.map(sample => ({ sample, parsed: parseDocument(sample.document) }));
 
   sampleArea.innerHTML = '<div class="sample-grid">' + rendered.map(({ sample: s }, i) => {
