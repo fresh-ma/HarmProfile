@@ -626,9 +626,9 @@
   }
 
   .chat-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    display: grid;
+    grid-template-columns: 24px minmax(0, 1fr);
+    gap: 8px 10px;
     padding: 12px 16px;
     background: var(--tag-bg);
     border-bottom: 1px solid var(--border-light);
@@ -645,10 +645,11 @@
     font-weight: 600;
     color: var(--text);
     min-width: 0;
+    align-self: center;
   }
 
   .chat-header .topic-tag {
-    margin-left: auto;
+    grid-column: 1 / -1;
     font-size: 10px;
     font-weight: 500;
     line-height: 1.35;
@@ -657,14 +658,20 @@
     border: 1px solid var(--border);
     padding: 5px 8px;
     border-radius: 8px;
-    max-width: min(320px, 58%);
+    width: 100%;
+    max-width: none;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow-wrap: anywhere;
+  }
+
+  .topic-tag .tag-category {
+    color: var(--accent);
+    font-weight: 700;
   }
 
   .chat-body {
@@ -2297,13 +2304,14 @@ function displaySamples() {
   sampleArea.innerHTML = '<div class="sample-grid">' + rendered.map(({ sample: s }, i) => {
     const logo = MODEL_LOGO[s._llm] || 'OpenAI';
     const collapsedClass = toggleExpandAll?.checked ? '' : ' collapsed';
-    const categoryTopicLabel = `${CAT_LABELS[s._category] || s._category} / ${s._topic_name}`;
+    const categoryLabel = CAT_LABELS[s._category] || s._category;
+    const categoryTopicLabel = `${categoryLabel} / ${s._topic_name}`;
     return `
       <div class="chat-card" data-sample-card="${i}">
         <div class="chat-header">
           <img src="data/figures/logos/${logo}.svg" alt="${logo}" onerror="this.style.display='none'">
           <span class="model-name">${escapeHtml(s._llm)}</span>
-          <span class="topic-tag" title="${escapeHtml(categoryTopicLabel)}">${escapeHtml(categoryTopicLabel)}</span>
+          <span class="topic-tag" title="${escapeHtml(categoryTopicLabel)}"><span class="tag-category">${escapeHtml(categoryLabel)}</span> / ${escapeHtml(s._topic_name)}</span>
         </div>
         <div class="chat-body">
           <div class="msg msg-user${collapsedClass}">
