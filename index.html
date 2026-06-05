@@ -2092,8 +2092,8 @@ async function loadSamples() {
   }
 
   let samples = [];
-  for (const cat of cats) {
-    const data = await loadCategoryData(cat);
+  const categoryRows = await Promise.all(cats.map(async cat => ({ cat, data: await loadCategoryData(cat) })));
+  for (const { cat, data } of categoryRows) {
     if (selectedTopicCat && cat !== selectedTopicCat) continue;
     const topics = selectedTopic ? [selectedTopic] : Object.keys(data);
     topics.forEach(topic => {
