@@ -1440,6 +1440,8 @@ const MIN_RESPONSE_WORDS = 35;
 const MIN_RESPONSE_CHARS = 180;
 const BASE = 'data';
 const CHAR_DELAY = 8;
+const DATA_FETCH_TIMEOUT_MS = 12000;
+const MAX_CATEGORY_FETCHES = 4;
 
 const CATEGORY_COLORS = {
   cbrn: '#38bdf8', copyright_reproduction: '#fb7185', csam: '#c084fc',
@@ -2078,10 +2080,39 @@ toggleExpandAll?.addEventListener('change', () => {
 async function loadCategoryData(cat) {
   if (categoryCache[cat]) return categoryCache[cat];
   sampleArea.innerHTML = '<div class="loading"><div class="spinner"></div><br>Loading data...</div>';
-  const resp = await fetch(`${BASE}/${cat}.json`);
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), DATA_FETCH_TIMEOUT_MS);
+  let resp;
+  try {
+    resp = await fetch(`${BASE}/${cat}.json`, { signal: controller.signal });
+  } finally {
+    clearTimeout(timeout);
+  }
+  if (!resp.ok) throw new Error(`Failed to load ${cat}: ${resp.status}`);
   const data = await resp.json();
   categoryCache[cat] = data;
   return data;
+}
+
+async function loadCategoryRows(cats) {
+  const rows = [];
+  let cursor = 0;
+  const workerCount = Math.min(MAX_CATEGORY_FETCHES, cats.length);
+
+  async function worker() {
+    while (cursor < cats.length) {
+      const cat = cats[cursor];
+      cursor += 1;
+      try {
+        rows.push({ cat, data: await loadCategoryData(cat) });
+      } catch (err) {
+        console.warn(`Skipping category ${cat}`, err);
+      }
+    }
+  }
+
+  await Promise.all(Array.from({ length: workerCount }, worker));
+  return rows;
 }
 
 async function loadSamples() {
@@ -2102,7 +2133,7 @@ async function loadSamples() {
   }
 
   let samples = [];
-  const categoryRows = await Promise.all(cats.map(async cat => ({ cat, data: await loadCategoryData(cat) })));
+  const categoryRows = await loadCategoryRows(cats);
   for (const { cat, data } of categoryRows) {
     if (selectedTopicCat && cat !== selectedTopicCat) continue;
     const topics = selectedTopic ? [selectedTopic] : Object.keys(data);
