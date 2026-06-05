@@ -644,21 +644,27 @@
     font-size: 13px;
     font-weight: 600;
     color: var(--text);
+    min-width: 0;
   }
 
   .chat-header .topic-tag {
     margin-left: auto;
     font-size: 10px;
     font-weight: 500;
+    line-height: 1.35;
     color: var(--text-muted);
     background: var(--surface);
     border: 1px solid var(--border);
-    padding: 2px 8px;
-    border-radius: 10px;
-    max-width: 200px;
+    padding: 5px 8px;
+    border-radius: 8px;
+    max-width: min(320px, 58%);
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow-wrap: anywhere;
   }
 
   .chat-body {
@@ -2260,12 +2266,13 @@ function displaySamples() {
   sampleArea.innerHTML = '<div class="sample-grid">' + rendered.map(({ sample: s }, i) => {
     const logo = MODEL_LOGO[s._llm] || 'OpenAI';
     const collapsedClass = toggleExpandAll?.checked ? '' : ' collapsed';
+    const categoryTopicLabel = `${CAT_LABELS[s._category] || s._category} / ${s._topic_name}`;
     return `
       <div class="chat-card" data-sample-card="${i}">
         <div class="chat-header">
           <img src="data/figures/logos/${logo}.svg" alt="${logo}" onerror="this.style.display='none'">
           <span class="model-name">${escapeHtml(s._llm)}</span>
-          <span class="topic-tag" title="${escapeHtml(s._topic_name)}">${escapeHtml(s._topic_name)}</span>
+          <span class="topic-tag" title="${escapeHtml(categoryTopicLabel)}">${escapeHtml(categoryTopicLabel)}</span>
         </div>
         <div class="chat-body">
           <div class="msg msg-user${collapsedClass}">
