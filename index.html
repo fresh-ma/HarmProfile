@@ -1473,6 +1473,7 @@ const CAT_LABELS = {
 let indexData = null;
 let categoryCache = {};
 let currentSamples = [];
+let currentDisplayPool = [];
 let currentCategory = '';
 let selectedCategories = new Set();
 let activeView = 'samples';
@@ -2085,6 +2086,7 @@ async function loadSamples() {
   const selectedTopicCat = topicParts.length ? topicParts[0] : selectedTopicCategory;
   if (!cats.length) {
     currentSamples = [];
+    currentDisplayPool = [];
     statsRow.style.display = 'none';
     statsRow.innerHTML = '';
     displaySamples();
@@ -2110,6 +2112,7 @@ async function loadSamples() {
   }
 
   currentSamples = samples;
+  currentDisplayPool = candidateSamplesForDisplay(samples);
   statsRow.style.display = 'none';
   statsRow.innerHTML = '';
   displaySamples();
@@ -2210,7 +2213,7 @@ function displaySamples() {
     return;
   }
 
-  const displayPool = candidateSamplesForDisplay(currentSamples);
+  const displayPool = currentDisplayPool.length ? currentDisplayPool : currentSamples;
   const selected = promoteShowcaseSamples(diverseModelSamplePool(displayPool, SAMPLES_PER_PAGE));
   const rendered = selected.map(sample => ({ sample, parsed: parseDocument(sample.document) }));
 
