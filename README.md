@@ -3,15 +3,11 @@
 <p align="center">
   <a href="https://fresh-ma.github.io/HarmProfile/"><img src="https://img.shields.io/badge/Website-HarmProfile-blue" alt="Website"></a>
   <a href="#"><img src="https://img.shields.io/badge/arXiv-coming%20soon-b31b1b" alt="arXiv"></a>
-  <a href="#"><img src="https://img.shields.io/badge/Dataset-coming%20soon-yellow" alt="Dataset"></a>
-  <a href="#"><img src="https://img.shields.io/badge/License-MIT-green" alt="License"></a>
 </p>
 
 <p align="center">
   🌐 <a href="https://fresh-ma.github.io/HarmProfile/">Website</a> |
-  📄 <a href="#">Paper</a> |
-  📊 <a href="#">Dataset</a> |
-  🤗 <a href="#">Hugging Face</a>
+  📄 <a href="#">Paper</a>
 </p>
 
 ## Abstract
