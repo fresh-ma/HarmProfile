@@ -1,9 +1,21 @@
-# HarmProfile: Characterizing Harmful Distributions in Frontier LLMs
+<h1 align="center">HarmProfile: Characterizing Harmful Distributions in Frontier LLMs</h1>
 
-[[Project Page](https://fresh-ma.github.io/HarmProfile/)] [[arXiv]()]
+<p align="center">
+  <a href="https://fresh-ma.github.io/HarmProfile/"><img src="https://img.shields.io/badge/Website-HarmProfile-blue" alt="Website"></a>
+  <a href="#"><img src="https://img.shields.io/badge/arXiv-coming%20soon-b31b1b" alt="arXiv"></a>
+  <a href="#"><img src="https://img.shields.io/badge/Dataset-coming%20soon-yellow" alt="Dataset"></a>
+  <a href="#"><img src="https://img.shields.io/badge/License-MIT-green" alt="License"></a>
+</p>
+
+<p align="center">
+  🌐 <a href="https://fresh-ma.github.io/HarmProfile/">Website</a> |
+  📄 <a href="#">Paper</a> |
+  📊 <a href="#">Dataset</a> |
+  🤗 <a href="#">Hugging Face</a>
+</p>
 
 ## Abstract
 
 Frontier large language models (LLMs) safety evaluation has largely treated harmful generation as an attack outcome rather than an object of analysis. Consequently, little is known about the outputs themselves, partly because large-scale, high-quality collections of frontier-model misbehavior are difficult to obtain. To address this gap, we introduce **HarmProfile**, a content-centric benchmark dataset that collects model misbehavior across diverse harm categories and model families, and defines the resulting content distribution as a model-level risk profile. The premise is that, just as linguistic behavior can be characterized from an utterance corpus, model risk can be characterized from the content, severity, and variation of its safety failures. HarmProfile contains over 80,000 validated artifacts from 23 frontier LLMs across 13 model families, organized into 15 harm categories and 57 subcategories. Using this corpus, we find that frontier LLMs reliably produce harmful content at scale, yet exhibit distinct risk profiles; both harmfulness and diversity grow with model capability, suggesting that frontier LLMs may appear safe yet harbor increasingly dangerous knowledge beneath the alignment surface.
 
-**Content Warning: This paper contains examples of harmful content.**
+> **Content Warning:** This paper contains examples of harmful content.
