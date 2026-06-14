@@ -1,0 +1,9 @@
+# HarmProfile: Characterizing Harmful Distributions in Frontier LLMs
+
+[[Project Page](https://fresh-ma.github.io/HarmProfile/)] [[arXiv]()]
+
+## Abstract
+
+Frontier large language models (LLMs) safety evaluation has largely treated harmful generation as an attack outcome rather than an object of analysis. Consequently, little is known about the outputs themselves, partly because large-scale, high-quality collections of frontier-model misbehavior are difficult to obtain. To address this gap, we introduce **HarmProfile**, a content-centric benchmark dataset that collects model misbehavior across diverse harm categories and model families, and defines the resulting content distribution as a model-level risk profile. The premise is that, just as linguistic behavior can be characterized from an utterance corpus, model risk can be characterized from the content, severity, and variation of its safety failures. HarmProfile contains over 80,000 validated artifacts from 23 frontier LLMs across 13 model families, organized into 15 harm categories and 57 subcategories. Using this corpus, we find that frontier LLMs reliably produce harmful content at scale, yet exhibit distinct risk profiles; both harmfulness and diversity grow with model capability, suggesting that frontier LLMs may appear safe yet harbor increasingly dangerous knowledge beneath the alignment surface.
+
+**Content Warning: This paper contains examples of harmful content.**
