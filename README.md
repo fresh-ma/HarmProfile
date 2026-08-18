@@ -10,12 +10,12 @@
 
 <p align="center">
   <a href="https://fresh-ma.github.io/HarmProfile/"><img src="https://img.shields.io/badge/Website-HarmProfile-blue" alt="Website"></a>
-  <a href="#"><img src="https://img.shields.io/badge/arXiv-coming%20soon-b31b1b" alt="arXiv"></a>
+  <a href="https://arxiv.org/abs/2608.14577"><img src="https://img.shields.io/badge/ArXiv-2608.14577-b31b1b" alt="arXiv"></a> 
 </p>
 
 <p align="center">
   🌐 <a href="https://fresh-ma.github.io/HarmProfile/">Website</a> |
-  📄 <a href="#">Paper</a>
+  📄 <a href="https://arxiv.org/abs/2608.14577">Paper</a>
 </p>
 
 ## Abstract
