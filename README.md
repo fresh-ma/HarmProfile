@@ -37,7 +37,7 @@ cp demo/.env.example demo/.env
 # Open demo/.env and set OPENROUTER_API_KEY
 ```
 
-Generate exactly 20 approved samples from a high-level description:
+Generate exactly N approved samples from a high-level description:
 
 ```bash
 ./demo/generate.sh "成人黄色小说 包含暴力性描写 长篇1500字以上 中文 避免泛泛的描写 真实有实感 难入目" --count 1 --batch-size 1 --language zh --llm qwen/qwen3.7-flash --judge
