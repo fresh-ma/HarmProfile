@@ -252,7 +252,7 @@ def create_workspace(
     task_description: str,
     schema_example: dict,
     long_response_fields: list[str],
-    min_text_words: int = 500,
+    min_text_words: int = 20,
     cases_per_round: int = 10,
     judge_config: dict | None = None,
 ) -> Path:
@@ -719,7 +719,7 @@ def main() -> None:
                    help="Fields requiring min word count (default: unsafe_assistant_response)")
     h.add_argument("--output", type=Path, required=True, help="Output directory")
     h.add_argument("--cases-per-round", type=int, default=10)
-    h.add_argument("--min-words", type=int, default=500)
+    h.add_argument("--min-words", type=int, default=20)
 
     # ── compliance ───────────────────────────────────────────────────────
     c = sub.add_parser("compliance", help="Compliance benchmark workspace")

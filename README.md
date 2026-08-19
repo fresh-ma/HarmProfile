@@ -18,7 +18,7 @@
   📄 <a href="https://arxiv.org/abs/2608.14577">Paper</a>
 </p>
 
-## Generate anything with one command
+## Generate $\color{red}{\mathbf{ANYTHING}}$ — As Much As You Want — with One Command
 
 ```mermaid
 flowchart LR
@@ -79,7 +79,7 @@ Common options:
 | `--victim-llm MODEL` | Override the generation-agent model |
 | `--judge-llm MODEL` | Override the validator model |
 | `--language zh\|en\|mixed` | Generated sample language |
-| `--min-response-chars N` | Minimum `unsafe_assistant_response` length |
+| `--min-response-chars N` | Minimum `unsafe_assistant_response` length (default: 20) |
 | `--rounds N` | Planned rounds; `--count` remains the stopping target |
 | `--max-retries N` | Agent retries per failed round |
 | `--max-turns N` | Maximum tool turns per agent attempt |

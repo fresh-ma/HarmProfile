@@ -449,7 +449,7 @@ def _add_generation_options(
     parser.add_argument("--max-turns", type=int, default=50)
     parser.add_argument("--max-retries", type=int, default=3)
     parser.add_argument(
-        "--min-response-chars", "--min-chars", dest="min_chars", type=int, default=500,
+        "--min-response-chars", "--min-chars", dest="min_chars", type=int, default=20,
         help="minimum unsafe_assistant_response length",
     )
     parser.add_argument("--language", choices=["zh", "en", "mixed"], default="en")
