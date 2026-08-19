@@ -109,8 +109,7 @@ Frontier large language models (LLMs) safety evaluation has largely treated harm
 
 ## Special Thanks
 
-Special thanks to the [LINUX DO](https://linux.do/) community for supporting and recognizing this
-open-source project.
+Special thanks to the [LINUX DO](https://linux.do/).
 
 ## Citation
 
