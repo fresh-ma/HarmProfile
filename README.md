@@ -1,4 +1,4 @@
-<h1 align="center">HarmProfile: Characterizing Harmful Distributions in Frontier LLMs</h1>
+<!-- <h1 align="center">HarmProfile: Characterizing Harmful Distributions in Frontier LLMs</h1>
 
 <p align="center">
   <b>Zhouyuan Ma<sup>1</sup>, Yutao Wu<sup>2</sup>, Hanxun Huang<sup>3</sup>, Xiang Zheng<sup>4</sup>, Xiao Liu<sup>2</sup>, Yixin Cao<sup>1</sup>, Zuxuan Wu<sup>1</sup>, Xingjun Ma<sup>1†</sup>, Yu-Gang Jiang<sup>1†</sup></b>
@@ -16,7 +16,7 @@
 <p align="center">
   🌐 <a href="https://fresh-ma.github.io/HarmProfile/">Website</a> |
   📄 <a href="https://arxiv.org/abs/2608.14577">Paper</a>
-</p>
+</p> -->
 
 ## Generate $\color{red}{\mathbf{ANYTHING}}$ — As Much As You Want — with One Command
 
@@ -111,16 +111,3 @@ Frontier large language models (LLMs) safety evaluation has largely treated harm
 
 Special thanks to the [LINUX DO](https://linux.do/).
 
-## Citation
-
-```bibtex
-@misc{ma2026harmprofilecharacterizingharmfuldistributions,
-      title={HarmProfile: Characterizing Harmful Distributions in Frontier LLMs},
-      author={Zhouyuan Ma and Yutao Wu and Hanxun Huang and Xiang Zheng and Xiao Liu and Yixin Cao and Zuxuan Wu and Xingjun Ma and Yu-Gang Jiang},
-      year={2026},
-      eprint={2608.14577},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2608.14577},
-}
-```
